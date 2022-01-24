@@ -12,7 +12,7 @@ const SingleJob = ({job}) => {
               </Card.Text>
               <Card.Link href={job.url}>Apply</Card.Link>
             </Card.Body>
-        </Card>
+        </Card> 
     )
 }
 

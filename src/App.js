@@ -5,14 +5,15 @@ import Home from './components/Home';
 
 const App = () => {
 
-  const [jobs, setJobs] = useState({})
+  {/*
+   const [jobs, setJobs] = useState({})
   const [isLoading, setisLoading] = useState(true)
 
 
   useEffect( () => {
     let fetchJobs = async () => {
       try {
-        let response = await fetch("https://strive-jobs-api.herokuapp.com/jobs?limit=10&skip=10")
+        let response = await fetch("https://strive-jobs-api.herokuapp.com/jobs?search=")
         
         if(response.ok) {
           const data = await response.json()
@@ -26,10 +27,13 @@ const App = () => {
     fetchJobs()
   }, [])
 
+  
+  */}
+
 
   return (
     <div className="App">
-      <Home jobs={jobs} isLoading={isLoading} />
+      <Home  />
     </div>
   );
 }

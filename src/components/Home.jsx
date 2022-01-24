@@ -1,9 +1,34 @@
 import React from 'react'
+import { useState, useEffect } from 'react'
 import JobList from './JobList'
 import { Container, Col, Row } from "react-bootstrap"
 import { Navbar, Form, FormControl, Button } from 'react-bootstrap'
 
-function Home({ jobs, isLoading }) {
+function Home() {
+
+    const [searchQuery, setSearchQuery] = useState("")
+    const [isLoading, setisLoading] = useState(true)
+    const [jobs, setJobs] = useState({})
+
+
+    const fetchSearched = async (searchQuery) => {
+        try {
+            let response = await fetch(`https://strive-jobs-api.herokuapp.com/jobs?search=${searchQuery}&limit=10`)
+
+            if(response.ok) {
+                let data  = await response.json()
+                setJobs(data.data)
+                setisLoading(false)
+                console.log(data)
+            }
+        } catch (error) {
+            
+        }
+    }
+    useEffect(() => {
+        fetchSearched(searchQuery)
+    }, [])
+
     return (
         <div>
             <Container fluid={true} className='container-100  px-0'>
@@ -14,14 +39,21 @@ function Home({ jobs, isLoading }) {
                             <Navbar.Toggle aria-controls="basic-navbar-nav" />
                             <Navbar.Collapse id="basic-navbar-nav">
                               <Form inline>
-                                <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                                <FormControl type="text"
+                                 placeholder="Search" 
+                                 className="mr-sm-2" 
+                                 onChange={(e) => {
+                                     setSearchQuery(e.target.value)
+                                 }}
+                                 
+                                 />
                                 <Button variant="outline-success">Search</Button>
                               </Form>
                             </Navbar.Collapse>
                         </Navbar>                                      
                     </Col>
                     <Col>
-                        <JobList jobs={jobs} isLoading={isLoading} />
+                        <JobList jobs={jobs} isLoading={isLoading} searchQuery={searchQuery}/>
                     </Col>
                 </Row>
             </Container>
