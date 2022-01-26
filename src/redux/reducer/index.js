@@ -13,7 +13,11 @@ const mainReducer = (state = initialState, action) => {
             }
             case REMOVE_FROM_CART:
                 return {
-
+                    ...state,
+                    saved: {
+                        ...state.saved,
+                        jobs: state.saved.jobs.filter((book, i) => i !== action.payload),
+                    }
                 }
         default:
             return state
