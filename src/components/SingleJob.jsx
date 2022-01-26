@@ -1,6 +1,10 @@
 import React from 'react'
-import { Card } from 'react-bootstrap'
+import { Button, Card } from 'react-bootstrap'
+import { connect } from 'react-redux'
+
 const SingleJob = ({job}) => {
+
+
     return (
         <Card key={job._id} className='mx-auto my-2' style={{ width: '70%' }}>
             <Card.Body>
@@ -11,6 +15,7 @@ const SingleJob = ({job}) => {
                 the card's content.
               </Card.Text>
               <Card.Link href={job.url}>Apply</Card.Link>
+              <Button variant='outline-secondary' className='ml-3 py-1'>Save</Button>
             </Card.Body>
         </Card> 
     )

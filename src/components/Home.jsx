@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import JobList from './JobList'
 import { Container, Col, Row } from "react-bootstrap"
 import { Navbar, Form, FormControl, Button } from 'react-bootstrap'
+import CartIndicator from './CartIndicator'
 
 function Home() {
 
@@ -50,6 +51,7 @@ function Home() {
                                 <Button variant="outline-success">Search</Button>
                               </Form>
                             </Navbar.Collapse>
+                            <CartIndicator />
                         </Navbar>                                      
                     </Col>
                     <Col>
