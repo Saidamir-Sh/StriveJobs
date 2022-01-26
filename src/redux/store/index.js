@@ -1,4 +1,5 @@
 import { createStore } from 'redux'
+import { mainReducer } from '../reducer'
 
 export const initialState = {
     saved: {
