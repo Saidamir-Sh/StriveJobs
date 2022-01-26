@@ -8,7 +8,7 @@ const mainReducer = (state = initialState, action) => {
                 ...state,
                 saved: {
                     ...state.saved,
-                    jobs: [...state.saved.jobs, action.payload]
+                    jobs: [...state.saved.jobs, action.payload],
                 }
             }
             case REMOVE_FROM_CART:
