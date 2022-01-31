@@ -1,19 +1,12 @@
 import React from 'react'
 import { Button, Card } from 'react-bootstrap'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import {  addToCartAction } from '../redux/action'
 
-const mapStateToProps = state => ({
-  jobs: state.saved.jobs
-})
 
-const mapDispatchToProps = (dispatch) => ({
-    addToCart: (job) => {
-      dispatch(addToCartAction(job))
-    }
-})
+const SingleJob = ({job}) => {
 
-const SingleJob = ({job, addToCart}) => {
+    const dispatch = useDispatch()
 
   
     return (
@@ -26,10 +19,10 @@ const SingleJob = ({job, addToCart}) => {
                 the card's content.
               </Card.Text>
               <Card.Link href={job.url}>Apply</Card.Link>
-              <Button variant='outline-secondary' onClick={this.props.addToCart()} className='ml-3 py-1'>Save</Button>
+              <Button variant='outline-secondary' onClick={dispatch(addToCartAction)}  className='ml-3 py-1'>Save</Button>
             </Card.Body>
         </Card> 
     )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SingleJob)
+export default (SingleJob)

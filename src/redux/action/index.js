@@ -6,7 +6,7 @@ export const addToCartAction = (job) => ({
     payload: job,
 })
 
-export const removeFronCart = (index) => ({
+export const removeFromCart = (index) => ({
     type: REMOVE_FROM_CART,
     payload: index,
 })
