@@ -7,14 +7,17 @@ import CartIndicator from './CartIndicator'
 
 function Home() {
 
-    const [searchQuery, setSearchQuery] = useState("")
+    const [query, setQuery] = useState("")
     const [isLoading, setisLoading] = useState(true)
-    const [jobs, setJobs] = useState({})
-
+    const [jobs, setJobs] = useState([])
+    const baseEndpoint = "https://strive-jobs-api.herokuapp.com/jobs?search=";
+    const handleChange = (e) => {
+        setQuery(e.target.value)
+    }
 
     const fetchSearched = async (searchQuery) => {
         try {
-            let response = await fetch(`https://strive-jobs-api.herokuapp.com/jobs?search=${searchQuery}&limit=10`)
+            let response = await fetch(`${baseEndpoint}${searchQuery}&limit=20`)
 
             if(response.ok) {
                 let data  = await response.json()
@@ -27,7 +30,7 @@ function Home() {
         }
     }
     useEffect(() => {
-        fetchSearched(searchQuery)
+        fetchSearched(query)
     }, [])
 
     return (
@@ -43,9 +46,7 @@ function Home() {
                                 <FormControl type="text"
                                  placeholder="Search" 
                                  className="mr-sm-2" 
-                                 onChange={(e) => {
-                                     setSearchQuery(e.target.value)
-                                 }}
+                                 onChange={handleChange}
                                  
                                  />
                                 <Button variant="outline-success">Search</Button>
@@ -55,7 +56,7 @@ function Home() {
                         </Navbar>                                      
                     </Col>
                     <Col>
-                        <JobList jobs={jobs} isLoading={isLoading} searchQuery={searchQuery}/>
+                        <JobList jobs={jobs} isLoading={isLoading} searchQuery={query}/>
                     </Col>
                 </Row>
             </Container>

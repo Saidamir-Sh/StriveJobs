@@ -10,3 +10,7 @@ export const removeFromCart = (index) => ({
     type: REMOVE_FROM_CART,
     payload: index,
 })
+
+// export const fetchJobs = (url, query) => {
+//     return async (dispatch)
+// }
