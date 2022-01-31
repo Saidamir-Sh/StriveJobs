@@ -1,37 +1,29 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import JobList from './JobList'
 import { Container, Col, Row } from "react-bootstrap"
 import { Navbar, Form, FormControl, Button } from 'react-bootstrap'
 import CartIndicator from './CartIndicator'
+import { fetchJobs } from '../redux/action'
 
 function Home() {
 
     const [query, setQuery] = useState("")
-    const [isLoading, setisLoading] = useState(true)
-    const [jobs, setJobs] = useState([])
     const baseEndpoint = "https://strive-jobs-api.herokuapp.com/jobs?search=";
+    const jobs = useSelector((state) => state.jobsArr.data)
+    const isLoading = useSelector((state) => state.jobsArr.isLoading)
+    console.log(isLoading)
+    
     const handleChange = (e) => {
         setQuery(e.target.value)
     }
 
-    const fetchSearched = async (searchQuery) => {
-        try {
-            let response = await fetch(`${baseEndpoint}${searchQuery}&limit=20`)
+    const dispatch = useDispatch()
 
-            if(response.ok) {
-                let data  = await response.json()
-                setJobs(data.data)
-                setisLoading(false)
-                console.log(data)
-            }
-        } catch (error) {
-            
-        }
-    }
     useEffect(() => {
-        fetchSearched(query)
-    }, [])
+        dispatch(fetchJobs(baseEndpoint, query))
+    }, [query])
 
     return (
         <div>

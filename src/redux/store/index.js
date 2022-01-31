@@ -8,6 +8,9 @@ export const initialState = {
     saved: {
         jobs: [],
     },
+    jobsArr: {
+        data: [],
+    }
 }
 
 let configureStore = createStore(

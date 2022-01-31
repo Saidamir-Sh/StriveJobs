@@ -3,11 +3,10 @@ import Loader from './Loader'
 import SingleJob from './SingleJob'
 
 const JobList = ({jobs, isLoading, searchQuery}) => {
-    console.log(jobs)
     return (
         <div>
             {
-                isLoading ? <Loader />  : jobs.filter((job) => {
+                isLoading ? <Loader />  : jobs.data.filter((job) => {
                     if(searchQuery === "") {
                         return job
                     } else if (

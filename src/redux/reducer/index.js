@@ -1,7 +1,8 @@
-import { ADD_TO_CART, REMOVE_FROM_CART } from "../action";
+import { ADD_TO_CART, REMOVE_FROM_CART, FETCH_JOBS } from "../action";
 import { initialState } from "../store";
 
 const mainReducer = (state = initialState, action) => {
+    console.log(action.payload)
     switch (action.type) {
         case ADD_TO_CART:
             return {
@@ -17,6 +18,14 @@ const mainReducer = (state = initialState, action) => {
                     saved: {
                         ...state.saved,
                         jobs: state.saved.jobs.filter((book, i) => i !== action.payload),
+                    }
+                }
+            case FETCH_JOBS: 
+                return {
+                    ...state,
+                    jobsArr: {
+                        data: action.payload,
+                        isLoading: false,
                     }
                 }
         default:
